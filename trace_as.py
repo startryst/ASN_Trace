@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+
+
 import subprocess
 import re
 import urllib.request
@@ -53,13 +56,20 @@ def search_as_name_ipip(ip_list):
             name_list.append(name_raw_str[1:-1])
     return name_list
 
-ip_list = get_ip_list('111.13.137.137')
-name_list_merit = search_as_name_merit(ip_list)
-name_list_cymru = search_as_name_cymru(ip_list)
-name_list_ipip = search_as_name_ipip(ip_list)
 
-print("Every Hop".ljust(20) + "MeritRADb".ljust(50) + "Team Cymru".ljust(50) + "ipip.net")
-for ip,merit, cymru, ipip in zip(ip_list, name_list_merit, name_list_cymru, name_list_ipip):
-    print(ip.ljust(20) + merit.ljust(50) + cymru.ljust(50) + ipip)
+def main():
+    ip_list = get_ip_list(input("Please enter the target IP address to trace: "))
+    name_list_merit = search_as_name_merit(ip_list)
+    name_list_cymru = search_as_name_cymru(ip_list)
+    name_list_ipip = search_as_name_ipip(ip_list)
+
+    print("Every Hop".ljust(20) + "MeritRADb".ljust(50) + "Team Cymru".ljust(50) + "ipip.net")
+    for ip,merit, cymru, ipip in zip(ip_list, name_list_merit, name_list_cymru, name_list_ipip):
+        print(ip.ljust(20) + merit.ljust(50) + cymru.ljust(50) + ipip)
+
+
+if __name__ == '__main__':
+    main()
+
 
 
